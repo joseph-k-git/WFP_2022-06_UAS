@@ -40,6 +40,24 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="role" class="col-md-4 col-form-label text-md-right">Sebagai</label>
+
+                            <div class="col-md-6">
+                                <input type="radio" id="buyer" name="role" value="buyer" checked="true">
+                                <label for="buyer">Pembeli</label><br>
+
+                                <input type="radio" id="admin" name="role" value="admin">
+                                <label for="admin">Administrator</label><br>
+
+                                @error('role')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
