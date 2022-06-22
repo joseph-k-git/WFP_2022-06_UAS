@@ -15,5 +15,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call(CategorySeeder::class); //CategorySeeder perlu dijalankan terlebih dahulu karena menjadi referensi Foreign Key dari Medicine.
         $this->call(MedicineSeeder::class); //MedicineSeeder dijalankan setelah CategorySeeder karena memiliki Foreign Key ke Category.
+        
+        $this->call(TransactionSeeder::class);
+        $this->call(TransactionsHasMedicinesSeeder::class);
     }
 }
