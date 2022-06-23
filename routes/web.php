@@ -21,6 +21,8 @@ Route::resource('/category', 'CategoryController')->middleware('auth');
 
 Route::resource('/medicine', 'MedicineController')->middleware('auth');
 
+Route::resource('/buyer', 'BuyerController')->middleware('auth');
+
 Route::resource('/transaction', 'TransactionController')->middleware('auth');
 
 Route::middleware(['auth'])->group(function() {

@@ -156,15 +156,21 @@ License: You must have a valid license purchased only from themeforest(the above
 				</a>
 			</li>
 			<li class="start ">
-				<a href="{{ url('/supplier') }}">
+				<a href="{{ url('/buyer') }}">
 				<i class="fa fa-star"></i>
-				<span class="title">Suppliers</span>
+				<span class="title">Buyers</span>
 				</a>
 			</li>
 			<li class="start ">
 				<a href="{{ url('/report/highestprices') }}">
-				<i class="fa fa-heart"></i>
+				<i class="fa fa-dollar"></i>
 				<span class="title">Obat Termahal</span>
+				</a>
+			</li>
+			<li class="start ">
+				<a href="{{ url('/report/topcustomers') }}">
+				<i class="fa fa-heart"></i>
+				<span class="title">Top Customers</span>
 				</a>
 			</li>
         </ul>
