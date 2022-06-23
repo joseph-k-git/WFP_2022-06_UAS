@@ -17,10 +17,26 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('/category', 'CategoryController');
+
+Route::resource('/medicine', 'MedicineController')->middleware('auth');
+
+Route::middleware(['auth'])->group(function() {
+
+    Route::post('/medicine/showInfo', 'MedicineController@showInfo')->name('medicine.showInfo');
+    
+    Route::post('/medicine/getEditFormA', 'MedicineController@getEditFormA')->name('medicine.getEditFormA');
+    
+    Route::post('/medicine/getEditFormB', 'MedicineController@getEditFormB')->name('medicine.getEditFormB');
+    
+    Route::post('/medicine/saveData', 'MedicineController@saveData')->name('medicine.saveData');
+    
+    Route::post('/medicine/deleteData', 'MedicineController@deleteData')->name('medicine.deleteData');
+
+});
+
 Auth::routes();
 
 Route::get('/controlpanel', 'HomeController@controlpanel')->name('controlpanel');
-
-Route::resource('/category', 'CategoryController');
 
 Route::get('/home', 'HomeController@index')->name('home');
