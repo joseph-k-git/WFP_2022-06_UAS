@@ -17,9 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('/category', 'CategoryController');
+Route::resource('/category', 'CategoryController')->middleware('auth');
 
 Route::resource('/medicine', 'MedicineController')->middleware('auth');
+
+Route::resource('/transaction', 'TransactionController')->middleware('auth');
 
 Route::middleware(['auth'])->group(function() {
 
@@ -32,6 +34,14 @@ Route::middleware(['auth'])->group(function() {
     Route::post('/medicine/saveData', 'MedicineController@saveData')->name('medicine.saveData');
     
     Route::post('/medicine/deleteData', 'MedicineController@deleteData')->name('medicine.deleteData');
+
+});
+
+
+
+Route::middleware(['auth'])->group(function() {
+    
+    Route::post('/transaction/showDataAjax', 'TransactionController@showAjax')->name('transaction.showAjax');
 
 });
 

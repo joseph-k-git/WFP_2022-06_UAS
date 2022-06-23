@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class TransactionController extends Controller
 {
@@ -14,7 +16,10 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize('admin-view_any');
+
+        $result = Transaction::all();
+        return view("controlpanel.transaction.index", ["data"=>$result]);
     }
 
     /**
@@ -81,5 +86,18 @@ class TransactionController extends Controller
     public function destroy(Transaction $transaction)
     {
         //
+    }
+
+    public function showAjax(Request $request)
+    {
+        $this->authorize('admin-view_any');
+
+        $id = $request->id;
+        $data = Transaction::find($id);
+        $medicines = $data->medicines;
+
+        return response()->json(array(
+            'msg' => view('controlpanel.transaction.showdetail', compact('data', 'medicines'))->render(),
+        ), 200); //200 OK HTML code
     }
 }

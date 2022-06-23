@@ -14,7 +14,7 @@ class Transaction extends Model
     //Create Many-to-Many
     public function medicines()
     {
-        return $this->belongsToMany('App\Medicine', 'medicine_transaction', 'transaction_id', 'medicine_id') // to Override names
+        return $this->belongsToMany('App\Medicine', 'transactions_has_medicines', 'transaction_id', 'medicine_id') // to Override names
             ->withPivot('quantity', 'price');
     }
 
