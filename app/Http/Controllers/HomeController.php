@@ -28,6 +28,7 @@ class HomeController extends Controller
 
     public function controlpanel()
     {
+        $this->authorize('admin-view_any');
         return view('controlpanel.home');
     }
 }
