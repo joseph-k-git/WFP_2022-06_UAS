@@ -27,6 +27,14 @@ Route::resource('/transaction', 'TransactionController')->middleware('auth');
 
 Route::middleware(['auth'])->group(function() {
 
+    Route::get('/report/highestprices', 'MedicineController@highestprices')->name('report.highestprices');
+
+    Route::get('/report/topcustomers', 'TransactionController@topcustomers')->name('report.topcustomers');
+
+});
+
+Route::middleware(['auth'])->group(function() {
+
     Route::post('/medicine/showInfo', 'MedicineController@showInfo')->name('medicine.showInfo');
     
     Route::post('/medicine/getEditFormA', 'MedicineController@getEditFormA')->name('medicine.getEditFormA');
@@ -38,7 +46,6 @@ Route::middleware(['auth'])->group(function() {
     Route::post('/medicine/deleteData', 'MedicineController@deleteData')->name('medicine.deleteData');
 
 });
-
 
 
 Route::middleware(['auth'])->group(function() {

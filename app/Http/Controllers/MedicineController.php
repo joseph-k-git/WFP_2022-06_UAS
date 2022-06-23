@@ -307,4 +307,11 @@ class MedicineController extends Controller
             ), 200);
         }
     }
+
+    public function highestprices()
+    {
+        $result = Medicine::orderBy('price', 'DESC')->take(5)->get();
+        $categories = Category::all();
+        return view('controlpanel.report.highestprices', compact('result', 'categories'));
+    }
 }
