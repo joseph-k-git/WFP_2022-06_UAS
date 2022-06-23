@@ -21,4 +21,6 @@ Auth::routes();
 
 Route::get('/controlpanel', 'HomeController@controlpanel')->name('controlpanel');
 
+Route::resource('/category', 'CategoryController');
+
 Route::get('/home', 'HomeController@index')->name('home');

@@ -1,0 +1,90 @@
+@extends('controlpanel.layout.conquer')
+
+@section('content')
+<!-- BEGIN Portlet PORTLET-->
+<div class="portlet">
+  <div class="portlet-title">
+    <div class="caption">
+      <i class="fa fa-reorder"></i>Daftar Kategori
+    </div>
+  </div>
+  <div class="portlet-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Category Name</th>
+          <th>Description</th>
+          <th>Detail</th>
+        </tr>
+      </thead>
+      <tbody>
+      @foreach ($categories as $category)
+        <tr>
+          <td>{{ $category->id }}</td>
+          <td><a href="/category/{{ $category->id }}">{{ $category->name }}</a></td>
+          <td>{{ $category->description }}</td>
+        </tr>
+        <tr>
+          <td colspan=4>
+          @foreach ($category->medicines as $medicine)
+            <div class="col-md-3" style="text-align:center; border:1px solid #999; border-radius:10px; margin:10px; padding:10px;">
+              <img src="{{ asset('/images/'.$medicine->image) }}" height="120px"/><br>
+              <b>{{ $medicine->generic_name }}</b><br>
+              {{ $medicine->form }}
+            </div>
+          @endforeach
+          </td>
+          <td>
+            <a class='btn btn-xs btn-warning' data-toggle='modal' data-target='#myModal' onclick='showProducts({{ $category->id }})'>
+              Edit
+            </a>
+            <a class='btn btn-xs btn-danger' data-toggle='modal' data-target='#myModal' onclick='showProducts({{ $category->id }})'>
+              Delete
+            </a>
+          </td>
+        </tr>
+      @endforeach
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- END Portlet PORTLET-->
+
+<div class="modal fade" id="myModal" tabindex="-1" role="basic" aria-hidden="true">
+  <div class="modal-dialog modal-wide">
+    <div class="modal-content" id="showproducts">
+      <div class="modal-header">
+        <h4 class="modal-title">Detail Category</h4>
+      </div>
+      <div class="modal-body">
+        <!--loading animated gif can put here-->
+        <img src="{{ asset('/assets/img/ajax-modal-loading.gif') }}" alt="" class="loading">
+      </div>      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection
+
+@section('javascript')
+<script>
+    function showProducts(category_id)
+    {
+        $.ajax({
+            type: 'GET',
+            url: '{{ url("/report/listmedicine/") }}'+'/'+category_id,
+            data: {
+              '_token':'<?php echo csrf_token() ?>',
+              'category_id':category_id,
+            },
+            success: function(data)
+            {
+                $('#showproducts').html(data);
+            },
+        });
+    }
+</script>
+@endsection
