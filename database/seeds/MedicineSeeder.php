@@ -34,7 +34,7 @@ b) patch:
                 'faskes1' => 0,
                 'faskes2' => 1,
                 'faskes3' => 1,
-                'image' => null,
+                'image' => 'fentanyl.jpg',
             ],
             [
                 'generic_name' => 'fentanil',
