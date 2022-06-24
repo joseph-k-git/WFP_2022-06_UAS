@@ -131,6 +131,9 @@ class TransactionController extends Controller
     {
         $id = $request->id;
         $data = Transaction::find($id);
+
+        //$this->authorize('buyer-view_transaction', $data);
+
         $medicines = $data->medicines;
 
         return response()->json(array(

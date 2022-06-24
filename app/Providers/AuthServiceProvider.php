@@ -29,6 +29,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('admin-action_any', 'App\Policies\AdminPolicy@action_any');
 
         Gate::define('buyer-view_any', 'App\Policies\BuyerPolicy@view_any');
-        Gate::define('buyer-action_any', 'App\Policies\BuyerPolicy@view_any');
+        Gate::define('buyer-view_transaction', 'App\Policies\BuyerPolicy@view_transaction');
+        Gate::define('buyer-action_any', 'App\Policies\BuyerPolicy@action_any');
     }
 }
