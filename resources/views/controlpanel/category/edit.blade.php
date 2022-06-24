@@ -13,8 +13,9 @@
             </div>
         </div>
         <div class="portlet-body form">
-            <form role="form" enctype="multipart/form-data" method="POST" action="{{ route('category.update') }}">
+            <form role="form" method="POST" action="{{ url('category/'.$data->id) }}">
                 @csrf
+                @method('PUT')
                 <div class="form-body">
                     <div class="form-group">
                         <label for="Category">Category</label>

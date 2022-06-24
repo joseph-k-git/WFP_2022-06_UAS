@@ -39,12 +39,14 @@
           @endforeach
           </td>
           <td>
-            <a class='btn btn-xs btn-warning' data-toggle='modal' data-target='#myModal' onclick='showProducts({{ $category->id }})'>
+            <a href="{{ url('/category/'.$category->id.'/edit') }}" class='btn btn-warning'>
               Edit
             </a>
-            <a class='btn btn-xs btn-danger' data-toggle='modal' data-target='#myModal' onclick='showProducts({{ $category->id }})'>
-              Delete
-            </a>
+            <form method="POST" action="{{ url('/category/'.$category->id) }}">
+              @csrf
+              @method('DELETE')
+              <input type="submit" value="Hapus" class="btn btn-xs btn-danger" onclick="if(!confirm('Are you sure want to delete this record {{ $category->name }}?')) return false;">
+            </form>
           </td>
         </tr>
       @endforeach

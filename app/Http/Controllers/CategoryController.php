@@ -29,7 +29,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('controlpanel.category.create');
     }
 
     /**
@@ -40,7 +40,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new Category();
+        $data->name = $request->get('name');
+        $data->description = $request->get('description');
+        
+        $data->save();
+
+        return redirect()->route('category.index')->with('status','category has been added');
     }
 
     /**
@@ -65,7 +71,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        $data = $category;
+        return view('controlpanel.category.edit', compact('data'));
     }
 
     /**
@@ -77,7 +84,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $category->name = $request->get('name');
+        $category->description = $request->get('description');
+
+        $category->save();
+
+        return redirect()->route('category.index')->with('status', 'category data has been changed');
     }
 
     /**
@@ -88,6 +100,14 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $this->authorize('admin-action_any');
+
+        try {
+            $category->delete();
+            return redirect()->route('category.index')->with('status', 'category data has been deleted');
+        } catch(\PDOException $e) {
+            $msg = "Data Gagal dihapus. Pastikan data child sudah hilang atau tidak berhubungan.";
+            return redirect()->route('category.index')->with('error', $msg);
+        }
     }
 }
