@@ -29,10 +29,6 @@ Route::middleware(['auth'])->group(function() {
 
     Route::get('/buyer/{id}', 'BuyerController@show')->name('buyer.show');
 
-    Route::get('/add-to-cart/{medicine_id}','BuyerController@addToCart');
-
-    Route::get('/subtract-from-cart/{medicine_id}','BuyerController@subtractFromCart');
-
     Route::get('/report/highestprices', 'MedicineController@highestprices')->name('report.highestprices');
 
     Route::get('/report/topcustomers', 'TransactionController@topcustomers')->name('report.topcustomers');
@@ -65,3 +61,15 @@ Auth::routes();
 Route::get('/controlpanel', 'HomeController@controlpanel')->name('controlpanel');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::middleware(['auth'])->group(function() {
+
+    Route::get('/add-to-cart/{medicine_id}','BuyerController@addToCart');
+
+    Route::get('/subtract-from-cart/{medicine_id}','BuyerController@subtractFromCart');
+
+    Route::get('/cart', function () { return view('storefront.cart'); });
+
+    Route::get('/checkout','TransactionController@checkout')->name('checkout');
+
+});

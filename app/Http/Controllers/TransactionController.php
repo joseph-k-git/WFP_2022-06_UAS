@@ -118,4 +118,25 @@ class TransactionController extends Controller
             
         return view('controlpanel.report.topcustomers', compact('result'));
     }
+
+    public function checkout()
+    {
+        $this->authorize('buyer-action_any');
+
+        $cart = session()->get('cart');
+        $user = Auth::user();
+
+        $transaction = new Transaction;
+
+        $transaction->user_id = $user->id;
+        $transaction->transaction_date = Carbon::now()->toDateTimeString();
+
+        $transaction->save();
+
+        $totalharga = $transaction->insertProducts($cart, $user);
+
+        session()->forget('cart');
+
+        return redirect('/home');
+    }
 }
