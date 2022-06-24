@@ -24,4 +24,12 @@ class BuyerPolicy
         $response = ($role == 'buyer') ? (Response::allow()) : (Response::deny('You have to be an buyer to do this'));
         return $response;
     }
+
+    public function view_transaction(User $user, Transaction $transaction)
+    {
+        $userId = $user->id;
+        $transaction_userId = $transaction->userId;
+        $response = ($userId == $transaction_userId) ? (Response::allow()) : (Response::deny('You have to be the owner of the transaction to view it'));
+        return $response;
+    }
 }

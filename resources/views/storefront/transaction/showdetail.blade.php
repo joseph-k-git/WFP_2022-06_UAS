@@ -1,4 +1,4 @@
-    <table id="cart" class="table table-hover table-condensed">
+<table id="cart" class="table table-hover table-condensed">
         <thead>
         <tr>
             <th style="width:50%">Product</th>

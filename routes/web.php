@@ -54,6 +54,8 @@ Route::middleware(['auth'])->group(function() {
     
     Route::post('/transaction/showDataAjax', 'TransactionController@showAjax')->name('transaction.showAjax');
 
+    Route::post('/mytransactions/showDataAjax', 'TransactionController@myAjax')->name('mytransaction.showAjax');
+
 });
 
 Auth::routes();
@@ -71,5 +73,7 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/cart', function () { return view('storefront.cart'); });
 
     Route::get('/checkout','TransactionController@checkout')->name('checkout');
+
+    Route::get('/mytransactions','TransactionController@mytransactions')->name('mytransactions');
 
 });
