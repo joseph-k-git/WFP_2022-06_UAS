@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Medicine;
 use App\Transaction;
 use Illuminate\Http\Request;
 
@@ -100,5 +101,27 @@ class BuyerController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    public function addToCart($medicine_id)
+    {
+        $p = Medicine::find($medicine_id);
+
+        $cart = session()->get('cart');
+
+        if (!isset($cart[$medicine_id])) {
+            $cart[$medicine_id] = [
+                'id' => $p->id,
+                'name' => $p->generic_name." (".$p->form.")",
+                'quantity' => 0,
+                'price' => $p->price,
+                'photo' => $p->image,
+            ];
+        }
+        $cart[$medicine_id]['quantity'] += 1;
+
+        session()->put('cart', $cart);
+
+        return redirect()->back()->with('success', 'Product '.$cart[$medicine_id]['name'].' added to cart successfully');
     }
 }
