@@ -119,6 +119,25 @@ class TransactionController extends Controller
         return view('controlpanel.report.topcustomers', compact('result'));
     }
 
+    public function mytransactions()
+    {
+        $user = Auth::user();
+        $data = Transaction::where('user_id', $user->id)->orderBy('transaction_date', 'DESC')->get();
+
+        return view('storefront.transaction.index', compact('data'));
+    }
+
+    public function myAjax(Request $request)
+    {
+        $id = $request->id;
+        $data = Transaction::find($id);
+        $medicines = $data->medicines;
+
+        return response()->json(array(
+            'msg' => view('storefront.transaction.showdetail', compact('data', 'medicines'))->render(),
+        ), 200); //200 OK HTML code
+    }
+
     public function checkout()
     {
         $this->authorize('buyer-action_any');
