@@ -308,10 +308,18 @@ class MedicineController extends Controller
         }
     }
 
-    public function highestprices()
+    public function topmedicines()
     {
-        $result = Medicine::orderBy('price', 'DESC')->take(5)->get();
+        $result = DB::table('medicines')
+            ->join('transactions_has_medicines', 'medicines.id', '=', 'transactions_has_medicines.medicine_id')
+            ->selectRaw('sum(transactions_has_medicines.quantity) as jumlah_per_medicine, medicines.id, medicines.generic_name, medicines.form, medicines.image, medicines.restriction_formula, medicines.price')
+            ->groupBy('medicines.id', 'medicines.generic_name', 'medicines.form', 'medicines.image', 'medicines.restriction_formula', 'medicines.price')
+            ->orderBy('jumlah_per_medicine', 'DESC')
+            ->take(5)
+            ->get();
+
         $categories = Category::all();
-        return view('controlpanel.report.highestprices', compact('result', 'categories'));
+
+        return view('controlpanel.report.topmedicines', compact('result', 'categories'));
     }
 }

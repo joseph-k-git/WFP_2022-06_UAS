@@ -3,7 +3,7 @@
 @section('content')
 
 <h3 class="page-title">
-    Obat Termahal <small>daftar lima obat termahal yang ada di apotik ini</small>
+    Obat Terlaris <small>daftar lima obat terlaris yang ada di apotik ini</small>
 </h3>
 <div class="page-bar">
 
@@ -43,7 +43,7 @@
         <th>Nama</th>
         <th>Form</th>
         <th>Restriction</th>
-        <th>Kategori</th>
+        <th>Quantity</th>
         <th>Foto</th>
         <th>Harga</th>
         <th>Detail</th>
@@ -55,7 +55,7 @@
         <td id="td_name_{{ $d->id }}"><a href="/medicine/{{ $d->id }}" target="_blank"><b>{{ $d->generic_name }}</b></a></td>
         <td id="td_form_{{ $d->id }}">{{ $d->form }}</td>
         <td id="td_restriction_{{ $d->id }}">{{ $d->restriction_formula }}</td>
-        <td id="td_category_{{ $d->id }}">{{ $d->category->name }}</td>
+        <td id="td_quantity_{{ $d->id }}">{{ $d->jumlah_per_medicine }}</td>
         <td id="td_image_{{ $d->id }}">
           <a href="#detail_{{ $d->id }}" data-toggle="modal">
             <img id="image_container_{{ $d->id }}" src="{{ asset('/images/'.$d->image) }}" height="100px"/>
@@ -70,11 +70,11 @@
           <a href="#modalEdit" data-toggle="modal" class="btn btn-xs btn-warning" onclick="getEditFormA({{ $d->id }})">Edit A</a>
           <a href="#modalEdit" data-toggle="modal" class="btn btn-xs btn-warning" onclick="getEditFormB({{ $d->id }})">Edit B</a>
           @can('admin-action_any')
-          <a class="btn btn-xs btn-danger" onclick="if(confirm('Apakah Anda yakin menghapus {{ $d->name }}?')) deleteDataRemoveTR({{ $d->id }})">DEL</a>
+          <a class="btn btn-xs btn-danger" onclick="if(confirm('Apakah Anda yakin menghapus {{ $d->generic_name }}?')) deleteDataRemoveTR({{ $d->id }})">DEL</a>
           <form method="POST" action="{{ url('/medicine/'.$d->id) }}">
             @csrf
             @method('DELETE')
-            <input type="submit" value="Hapus" class="btn btn-danger" onclick="if(!confirm('Are you sure want to delete this record {{ $d->name }}?')) return false;">
+            <input type="submit" value="Hapus" class="btn btn-danger" onclick="if(!confirm('Are you sure want to delete this record {{ $d->generic_name }}?')) return false;">
           </form>
           @endcan
         </td>

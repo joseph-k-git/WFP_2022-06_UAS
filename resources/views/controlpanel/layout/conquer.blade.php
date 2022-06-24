@@ -168,9 +168,9 @@ License: You must have a valid license purchased only from themeforest(the above
 				</a>
 			</li>
 			<li class="start ">
-				<a href="{{ url('/report/highestprices') }}">
+				<a href="{{ url('/report/topmedicines') }}">
 				<i class="fa fa-dollar"></i>
-				<span class="title">Obat Termahal</span>
+				<span class="title">Top Medicines</span>
 				</a>
 			</li>
 			<li class="start ">

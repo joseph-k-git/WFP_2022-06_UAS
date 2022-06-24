@@ -29,7 +29,7 @@ Route::middleware(['auth'])->group(function() {
 
     Route::get('/buyer/{id}', 'BuyerController@show')->name('buyer.show');
 
-    Route::get('/report/highestprices', 'MedicineController@highestprices')->name('report.highestprices');
+    Route::get('/report/topmedicines', 'MedicineController@topmedicines')->name('report.topmedicines');
 
     Route::get('/report/topcustomers', 'TransactionController@topcustomers')->name('report.topcustomers');
 
