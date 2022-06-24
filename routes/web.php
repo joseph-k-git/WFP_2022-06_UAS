@@ -68,8 +68,8 @@ Route::middleware(['auth'])->group(function() {
 
     Route::get('/subtract-from-cart/{medicine_id}','BuyerController@subtractFromCart');
 
-    Route::get('/cart', function () {
-        return view('storefront.cart');
-    });
+    Route::get('/cart', function () { return view('storefront.cart'); });
+
+    Route::get('/checkout','TransactionController@checkout')->name('checkout');
 
 });

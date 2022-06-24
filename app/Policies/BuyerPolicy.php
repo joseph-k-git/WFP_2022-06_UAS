@@ -17,4 +17,11 @@ class BuyerPolicy
         $response = ($role == 'buyer') ? (Response::allow()) : (Response::deny('You have to be an buyer to view this'));
         return $response;
     }
+
+    public function action_any(User $user)
+    {
+        $role = $user->role;
+        $response = ($role == 'buyer') ? (Response::allow()) : (Response::deny('You have to be an buyer to do this'));
+        return $response;
+    }
 }
