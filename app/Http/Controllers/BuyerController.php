@@ -124,4 +124,22 @@ class BuyerController extends Controller
 
         return redirect()->back()->with('success', 'Product '.$cart[$medicine_id]['name'].' added to cart successfully');
     }
+
+    public function subtractFromCart($medicine_id)
+    {
+        $cart = session()->get('cart');
+
+        $message = "Already 0 quantity";
+        if (isset($cart[$medicine_id])) {
+            $cart[$medicine_id]['quantity']--;
+            $message = 'Product '.$cart[$medicine_id]['name'].' subtract to cart successfully';
+            if ($cart[$medicine_id]['quantity'] <= 0) {
+                unset($cart[$medicine_id]);
+            }
+        }
+
+        session()->put('cart', $cart);
+
+        return redirect()->back()->with('success', $message);
+    }
 }

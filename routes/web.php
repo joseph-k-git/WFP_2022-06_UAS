@@ -31,6 +31,8 @@ Route::middleware(['auth'])->group(function() {
 
     Route::get('/add-to-cart/{medicine_id}','BuyerController@addToCart');
 
+    Route::get('/subtract-from-cart/{medicine_id}','BuyerController@subtractFromCart');
+
     Route::get('/report/highestprices', 'MedicineController@highestprices')->name('report.highestprices');
 
     Route::get('/report/topcustomers', 'TransactionController@topcustomers')->name('report.topcustomers');

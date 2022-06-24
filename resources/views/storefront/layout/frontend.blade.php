@@ -93,7 +93,7 @@
                         </div>
                         <div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
                             <p>{{ $details['name'] }}</p>
-                            <span class="price text-info"> Rp{{ $details['price'] }}</span> <span class="count"> Qty: {{ $details['quantity'] }}</span>
+                            <span class="price text-info"> Rp{{ $details['price'] }}</span> <span> Qty: {{ $details['quantity'] }}</span> <span><a href="/add-to-cart/{{ $details['id'] }}" class="btn btn-xs btn-info">+</a></span> <span><a href="/subtract-from-cart/{{ $details['id'] }}" class="btn btn-xs btn-warning">-</a></span>
                         </div>
                     </div>
                     @endforeach
