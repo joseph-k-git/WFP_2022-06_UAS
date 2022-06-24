@@ -8,6 +8,9 @@
       <i class="fa fa-reorder"></i>Daftar Kategori
     </div>
   </div>
+  <a class='btn btn-info' href="{{ route('category.create') }}">
+    Add New Category
+  </a>
   <div class="portlet-body">
     <table class="table table-hover">
       <thead>

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h2>Form Tambah Category</h2>
+    <h2>Form Edit Category</h2>
     <div class="portlet">
         <div class="portlet-title">
             <div class="caption">
@@ -13,11 +13,11 @@
             </div>
         </div>
         <div class="portlet-body form">
-            <form role="form" enctype="multipart/form-data" method="POST" action="{{ route('medicine.store') }}">
+            <form role="form" enctype="multipart/form-data" method="POST" action="{{ route('category.update') }}">
                 @csrf
                 <div class="form-body">
                     <div class="form-group">
-                        <label for="Medicine">Category</label>
+                        <label for="Category">Category</label>
                         <input type="text" class="form-control" id="" name="name" placeholder="Isikan nama kategori">
                         <span class="help-block">
                         Tulis nama kategori (category's name). </span>
