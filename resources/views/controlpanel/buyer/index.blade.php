@@ -3,7 +3,7 @@
 @section('content')
 
 <h3 class="page-title">
-    Daftar Obat <small>daftar semua obat yang ada di apotik ini</small>
+    Daftar Pembeli <small>daftar semua akun buyer yang ada di apotik ini</small>
 </h3>
 <div class="page-bar">
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Transaction;
 use Illuminate\Http\Request;
 
 class BuyerController extends Controller
@@ -47,9 +48,24 @@ class BuyerController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
-        //
+        $buyer = User::find($id);
+        $transactions = Transaction::where('user_id', $buyer->id)->with('medicines')->get();
+
+        $totals = [];
+        foreach ($transactions as $t => $tran) {
+            $totals[$tran->id] = 0;
+            $medicines = $tran->medicines;
+            foreach ($medicines as $m => $med) {
+                $item_detail = $med->pivot;
+                $quantity = $item_detail->quantity;
+                $price = $item_detail->price;
+                $totals[$tran->id] += $quantity * $price;
+            }
+        }
+
+        return view('controlpanel.buyer.show', compact('buyer', 'transactions', 'totals'));
     }
 
     /**
