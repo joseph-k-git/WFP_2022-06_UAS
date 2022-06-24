@@ -6,6 +6,7 @@ use App\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use DB;
 
 class TransactionController extends Controller
 {
@@ -99,5 +100,22 @@ class TransactionController extends Controller
         return response()->json(array(
             'msg' => view('controlpanel.transaction.showdetail', compact('data', 'medicines'))->render(),
         ), 200); //200 OK HTML code
+    }
+
+    public function topcustomers()
+    {
+        $this->authorize('admin-view_any');
+
+        $result = DB::table('users')
+            ->join('transactions', 'users.id', '=', 'transactions.user_id')
+            ->join('transactions_has_medicines', 'transactions.id', '=', 'transactions_has_medicines.transaction_id')
+            ->selectRaw('users.id as id, users.name as name, users.email as email, sum(transactions_has_medicines.quantity * transactions_has_medicines.price) as total_per_user')
+            ->groupBy('users.id', 'users.name', 'users.email')
+            ->orderBy('total_per_user', 'DESC')
+            ->take(3)
+            ->get();
+        
+            
+        return view('controlpanel.report.topcustomers', compact('result'));
     }
 }
