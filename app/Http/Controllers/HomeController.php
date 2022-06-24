@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Medicine;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,7 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('storefront.home');
+        $products = Medicine::all();
+        return view('storefront.home', compact('products'));
     }
 
     public function controlpanel()
