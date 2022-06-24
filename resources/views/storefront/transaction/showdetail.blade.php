@@ -24,7 +24,7 @@
                 <div class="row">
                     <div class="col-sm-3 hidden-xs"><img height="50px" src="{{ asset('images/'.$m->image) }}" alt="..." class="img-responsive"/></div>
                     <div class="col-sm-9">
-                        <h4 class="nomargin"><a href="{{ url('/medicine/'.$m->id) }}">{{ $m->generic_name }} ({{ $m->form }})</a></h4>
+                        <a href="{{ url('/medicine/'.$m->id) }}">{{ $m->generic_name }} ({{ $m->form }})</a>
                     </div>
                 </div>
             </td>
